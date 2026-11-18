@@ -1,0 +1,36 @@
+name: Testudo seat watch
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: seat-watch
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests beautifulsoup4
+      - name: Check seats
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: |
+          python seat_watcher.py --once --topic "$NTFY_TOPIC" \
+            --sections "CMSC330=0101,0103,0105,0106 STAT401=0111,0112,0113,0301"
+      - name: Save state
+        run: |
+          git config user.name "seat-watch-bot"
+          git config user.email "seat-watch-bot@users.noreply.github.com"
+          git add testudo_seat_state.json
+          git diff --cached --quiet || (git commit -m "Update seat state" && git push)
