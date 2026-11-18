@@ -27,7 +27,7 @@ jobs:
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
         run: |
           python seat_watcher.py --once --topic "$NTFY_TOPIC" \
-            --sections "CMSC330=0101,0103,0105,0106 STAT401=0111,0112,0113,0301"
+            --sections "STAT401=0111,0112,0113,0201"
       - name: Save state
         run: |
           git config user.name "seat-watch-bot"
