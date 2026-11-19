@@ -27,7 +27,7 @@ USAGE
     # format is "COURSE=sec1,sec2 COURSE=sec1" (space-separated per course,
     # comma-separated section IDs). Any course left out watches ALL sections.
     python testudo_seat_watcher.py --topic gavin-umd-seats-8f3k2 \
-        --sections "CMSC216=0101,0102 STAT410=0201"
+        --sections "CMSC330=0101,0102,0105,0106 STAT401=0111,0112,0113,0301"
 
     # one-off check for cron / Task Scheduler (no prompt, watches everything
     # unless --sections is also given)
