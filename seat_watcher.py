@@ -60,7 +60,7 @@ import requests
 from bs4 import BeautifulSoup
 
 TERM = "202701"  # Spring 2027 (UMD term codes: YYYY + "08" = Fall, "01" = Spring)
-COURSES = ["CMSC330", "STAT401"]
+COURSES = []
 BASE_URL = "https://app.testudo.umd.edu/soc"
 STATE_FILE = Path(__file__).with_name("testudo_seat_state.json")
 USER_AGENT = "Mozilla/5.0 (compatible; SeatWatcher/1.0; personal, non-commercial use)"
